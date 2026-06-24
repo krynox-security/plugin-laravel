@@ -1,0 +1,81 @@
+# Krynox Captcha for Laravel
+
+Privacy-first, proof-of-work CAPTCHA for Laravel — a **Blade component** to render the
+widget and a **validation rule** to verify it. No cookies, no puzzles.
+
+## Install
+
+```bash
+composer require krynox/captcha-laravel
+```
+
+The package auto-registers (Laravel package discovery). Set your keys in `.env`:
+
+```env
+KRYNOX_SITE_KEY=kcpt_live_xxx
+KRYNOX_SECRET_KEY=kcps_live_xxx
+```
+
+(Optional) publish the config: `php artisan vendor:publish --tag=krynox-config`.
+
+## Render the widget
+
+```blade
+<form method="POST" action="/register">
+    @csrf
+    <input name="email" type="email" required>
+
+    <x-krynox-captcha />
+
+    <button type="submit">Create account</button>
+</form>
+```
+
+The widget submits its solution as a hidden `krynox-captcha` field.
+
+## Verify the submission
+
+Use the string rule:
+
+```php
+$request->validate([
+    'krynox-captcha' => 'required|krynox',
+]);
+```
+
+…or the rule object:
+
+```php
+use Krynox\Captcha\Rules\Krynox;
+
+$request->validate([
+    'krynox-captcha' => ['required', new Krynox],
+]);
+```
+
+Or verify manually anywhere:
+
+```php
+use Krynox\Captcha\KrynoxCaptcha;
+
+$result = app(KrynoxCaptcha::class)->verify($request->input('krynox-captcha'), $request->ip());
+if (! $result['success']) {
+    abort(422, 'Captcha failed');
+}
+// $result['risk'] => 'low' | 'medium' | 'high'
+```
+
+### Feedback (false-positive correction)
+
+```php
+app(KrynoxCaptcha::class)->feedback('human', $request->ip(), 'support ticket #1234');
+```
+
+## Config
+
+`config/krynox.php`: `site_key`, `secret_key`, `api_host`, `cdn_host`, `timeout`
+(override `api_host` / `cdn_host` for self-hosting).
+
+## License
+
+MIT. Built for [Krynox Captcha](https://krynox.id) · docs: <https://krynox.id/docs>
