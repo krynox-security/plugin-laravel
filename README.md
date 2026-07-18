@@ -82,6 +82,15 @@ app(KrynoxCaptcha::class)->feedback('human', $request->ip(), 'support ticket #12
 `config/krynox.php`: `site_key`, `secret_key`, `api_host`, `cdn_host`, `timeout`, `retries`
 (override `api_host` / `cdn_host` for self-hosting).
 
+## Honeypot
+
+Enable **Honeypot** for the site in the Krynox dashboard and the widget injects an invisible decoy
+field (`krynox-hp`) that only bots fill in. The `krynox` validation rule forwards it to `/siteverify`
+as `honeypot` automatically — no code change needed (a manual
+`KrynoxCaptcha::verify($token, $ip, $request->input('krynox-hp'))` call works too). The data plane
+then floors the score (report mode) or rejects with `honeypot-tripped` (enforce mode). See the
+[Honeypot docs](https://docs.krynox.net/server-side/honeypot/).
+
 ## License
 
 MIT. Built for [Krynox Captcha](https://krynox.net) · docs: <https://krynox.net/docs>

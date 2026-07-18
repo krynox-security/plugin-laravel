@@ -25,7 +25,7 @@ class KrynoxCaptcha
      *
      * @return array{success:bool,score:?float,risk:?string,hostname:?string,challenge_ts:?string,error_codes:array<int,string>,reasons:array<int,string>,agent:?array{verified:bool,name:?string,allowlisted:bool},human:?array{attested:bool,method:?string,issuer:?string}}
      */
-    public function verify(?string $response, ?string $remoteip = null): array
+    public function verify(?string $response, ?string $remoteip = null, ?string $honeypot = null): array
     {
         if (empty($response)) {
             return $this->fail(['missing-input-response']);
@@ -41,6 +41,7 @@ class KrynoxCaptcha
                     'secret' => $this->secret,
                     'response' => $response,
                     'remoteip' => $remoteip,
+                    'honeypot' => $honeypot,
                     'idempotency_key' => $key,
                 ])
                 ->json();
