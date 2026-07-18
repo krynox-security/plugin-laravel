@@ -27,7 +27,7 @@
   "support": {
     "issues": "https://github.com/krynox-security/plugin-laravel/issues",
     "source": "https://github.com/krynox-security/plugin-laravel",
-    "docs": "https://krynox.net/docs"
+    "docs": "https://docs.krynox.net"
   },
   "minimum-stability": "stable",
   "prefer-stable": true

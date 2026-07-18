@@ -84,4 +84,4 @@ app(KrynoxCaptcha::class)->feedback('human', $request->ip(), 'support ticket #12
 
 ## License
 
-MIT. Built for [Krynox Captcha](https://krynox.net) · docs: <https://krynox.net/docs>
+MIT. Built for [Krynox Captcha](https://krynox.net) · docs: <https://docs.krynox.net>
