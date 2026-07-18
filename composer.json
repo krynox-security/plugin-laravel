@@ -2,10 +2,10 @@
   "name": "krynox/captcha-laravel",
   "description": "Krynox Captcha for Laravel — privacy-first, proof-of-work CAPTCHA. Blade component + validation rule.",
   "keywords": ["laravel", "captcha", "krynox", "spam", "proof-of-work", "privacy"],
-  "homepage": "https://krynox.id",
+  "homepage": "https://krynox.net",
   "license": "MIT",
   "authors": [
-    { "name": "Krynox", "homepage": "https://krynox.id" }
+    { "name": "Krynox", "homepage": "https://krynox.net" }
   ],
   "require": {
     "php": "^8.1",
@@ -27,7 +27,7 @@
   "support": {
     "issues": "https://github.com/krynox-security/plugin-laravel/issues",
     "source": "https://github.com/krynox-security/plugin-laravel",
-    "docs": "https://krynox.id/docs"
+    "docs": "https://krynox.net/docs"
   },
   "minimum-stability": "stable",
   "prefer-stable": true
