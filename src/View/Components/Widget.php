@@ -17,8 +17,8 @@ class Widget extends Component
     public function __construct(?string $sitekey = null)
     {
         $key = $sitekey ?: (string) config('krynox.site_key');
-        $api = rtrim((string) config('krynox.api_host', 'https://api.krynox.id'), '/');
-        $this->cdn = rtrim((string) config('krynox.cdn_host', 'https://cdn.krynox.id'), '/');
+        $api = rtrim((string) config('krynox.api_host', 'https://api.krynox.net'), '/');
+        $this->cdn = rtrim((string) config('krynox.cdn_host', 'https://cdn.krynox.net'), '/');
         $this->challenge = $api.'/challenge?sitekey='.rawurlencode($key);
     }
 

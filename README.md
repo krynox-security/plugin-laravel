@@ -63,7 +63,13 @@ if (! $result['success']) {
     abort(422, 'Captcha failed');
 }
 // $result['risk'] => 'low' | 'medium' | 'high'
+// $result['reasons'] => ['tor-exit', ...]; $result['agent']; $result['human']
 ```
+
+The result array carries the full contract: `success`, `score`, `risk`, `hostname`, `challenge_ts`,
+`error_codes`, `reasons`, `agent` (`{verified,name,allowlisted}` or null), `human`
+(`{attested,method,issuer}` or null). Transient failures (network / 429 / 5xx) are retried
+automatically with a per-verify idempotency key.
 
 ### Feedback (false-positive correction)
 
@@ -73,9 +79,9 @@ app(KrynoxCaptcha::class)->feedback('human', $request->ip(), 'support ticket #12
 
 ## Config
 
-`config/krynox.php`: `site_key`, `secret_key`, `api_host`, `cdn_host`, `timeout`
+`config/krynox.php`: `site_key`, `secret_key`, `api_host`, `cdn_host`, `timeout`, `retries`
 (override `api_host` / `cdn_host` for self-hosting).
 
 ## License
 
-MIT. Built for [Krynox Captcha](https://krynox.id) · docs: <https://krynox.id/docs>
+MIT. Built for [Krynox Captcha](https://krynox.net) · docs: <https://krynox.net/docs>

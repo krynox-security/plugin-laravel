@@ -18,8 +18,9 @@ class KrynoxServiceProvider extends ServiceProvider
 
             return new KrynoxCaptcha(
                 (string) ($c['secret_key'] ?? ''),
-                (string) ($c['api_host'] ?? 'https://api.krynox.id'),
+                (string) ($c['api_host'] ?? 'https://api.krynox.net'),
                 (int) ($c['timeout'] ?? 5),
+                (int) ($c['retries'] ?? 2),
             );
         });
     }
