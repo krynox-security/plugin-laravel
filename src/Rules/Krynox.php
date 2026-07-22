@@ -15,7 +15,8 @@ class Krynox implements ValidationRule
     {
         $result = app(KrynoxCaptcha::class)->verify(
             is_string($value) ? $value : null,
-            request()->ip()
+            request()->ip(),
+            request()->input('krynox-hp')
         );
 
         if (! $result['success']) {

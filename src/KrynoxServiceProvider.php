@@ -40,7 +40,8 @@ class KrynoxServiceProvider extends ServiceProvider
         Validator::extend('krynox', function ($attribute, $value, $parameters, $validator) {
             return app(KrynoxCaptcha::class)->verify(
                 is_string($value) ? $value : null,
-                request()->ip()
+                request()->ip(),
+                request()->input('krynox-hp')
             )['success'];
         }, 'The :attribute could not be verified. Please try again.');
     }
