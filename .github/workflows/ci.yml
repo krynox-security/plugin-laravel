@@ -1,0 +1,32 @@
+# GitHub Actions — build + integration tests (Testbench against a real local
+# HTTP mock of the Krynox data plane; no Http::fake).
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: PHPUnit (PHP ${{ matrix.php }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ["8.3", "8.4"]
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+      - uses: shivammathur/setup-php@cf4cade2721270509d5b1c766ab3549210a39a2a # v2
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: none
+      - name: Install dependencies (dev included)
+        run: composer update --no-interaction --no-progress --prefer-dist
+      - name: Run integration tests
+        run: vendor/bin/phpunit

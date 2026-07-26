@@ -12,10 +12,22 @@
     "illuminate/support": "^10.0|^11.0|^12.0|^13.0",
     "guzzlehttp/guzzle": "^7.5"
   },
+  "require-dev": {
+    "orchestra/testbench": "^8.22|^9.0|^10.0|^11.0",
+    "phpunit/phpunit": "^10.5|^11.0|^12.0"
+  },
   "autoload": {
     "psr-4": {
       "Krynox\\Captcha\\": "src/"
     }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Krynox\\Captcha\\Tests\\": "tests/"
+    }
+  },
+  "scripts": {
+    "test": "phpunit"
   },
   "extra": {
     "laravel": {
